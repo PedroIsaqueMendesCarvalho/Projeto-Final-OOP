@@ -1,5 +1,10 @@
 package usuarios;
 
-public class Adminstrador {
+class Administrador extends Usuarios{
+
+    public Administrador() {
+        super(null, null, null, null);
+    }
+    
     
 }
