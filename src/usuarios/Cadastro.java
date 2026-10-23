@@ -1,6 +1,6 @@
 package usuarios;
 
 public interface Cadastro{
-    void CadastroUsuario(); //implementar, possivelmente default
+    void CadastroDeCliente(); //implementar, possivelmente default. Usado para permitir o cadastro de clientes(?)
     
 }
