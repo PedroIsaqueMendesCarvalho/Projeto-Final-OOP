@@ -1,6 +1,8 @@
 package animais;
+import controledesaude.*;
 
 public abstract class Animal {
+    private ControleDeSaude controleDeSaude;
     private String nome;
     private String especia;
     private String raca;

@@ -1,5 +1,5 @@
 package usuarios;
- public abstract class Usuarios {  
+ public abstract class Usuarios{  
     private String nome;
     private String cpf;
     private String senha;
@@ -19,16 +19,16 @@ package usuarios;
         }else this.email = email;
     }
 
-    public void setNome(String nome, String senha) {
+    public void setNome(String nome, String senha){
         if (!this.senha.equals(senha)) throw new SecurityException("Senha incorreta");
         else this.nome = nome;
     }
 
-    public String getNome() {
+    public String getNome(){
         return nome;
     }
 
-    public void setEmail(String email, String senha) {
+    public void setEmail(String email, String senha){
         if (!this.senha.equals(senha)) throw new SecurityException("Senha incorreta"); 
         else this.email = email;
     }
