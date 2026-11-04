@@ -20,6 +20,18 @@ public class Consulta {
     public LocalDate getData() {
         return data;
     }
+    public String getHorario() {
+        return horario;
+    }
+    public String getTipoDeConsulta() {
+        return tipoDeConsulta;
+    }
+    public String getDiagnostico() {
+        return diagnostico;
+    }
+    public String getPrescricao() {
+        return prescricao;
+    }
 
 }
 

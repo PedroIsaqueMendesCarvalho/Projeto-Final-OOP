@@ -1,0 +1,64 @@
+package telas;
+import java.awt.GridLayout;
+import javax.swing.*;
+import usuarios.*;
+public class TelaInicial {
+    private final UsuariosCadastrados usuariosCadastrados;
+
+    public TelaInicial(UsuariosCadastrados usuariosCadastrados) {
+        this.usuariosCadastrados = usuariosCadastrados;
+    }
+
+    public void exibir() {
+        Usuarios logado = null;
+        int tentativas = 0;
+        while (logado == null && tentativas < 3) {
+            // painel com os dois campos, mostrado dentro de uma unica janela
+            JTextField campoEmail = new JTextField();
+            JPasswordField campoSenha = new JPasswordField();
+            JPanel painel = new JPanel(new GridLayout(0, 1));
+            painel.add(new JLabel("Email:"));
+            painel.add(campoEmail);
+            painel.add(new JLabel("Senha:"));
+            painel.add(campoSenha);
+
+            int opcao = JOptionPane.showConfirmDialog(null, painel, "Login",
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+            if (opcao != JOptionPane.OK_OPTION) {
+                return; // usuario clicou em Cancelar ou fechou a janela
+            }
+
+            String email = campoEmail.getText();
+            String senha = new String(campoSenha.getPassword());
+
+            try {
+                logado = usuariosCadastrados.login(email, senha);
+            } catch (SecurityException e) {
+                tentativas++;
+                JOptionPane.showMessageDialog(null,
+                        e.getMessage() + " (" + (3 - tentativas) + " tentativas restantes)",
+                        "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        if (logado == null) {
+            JOptionPane.showMessageDialog(null, "Numero maximo de tentativas atingido.",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        JOptionPane.showMessageDialog(null, "Bem-vindo(a), " + logado.getNome() + "!");
+
+        if (logado instanceof Administrador admin) {
+            menuAdministrador(admin);
+        } else if (logado instanceof Veterinario vet) {
+            menuVeterinario(vet);
+        } else if (logado instanceof Voluntarios vol) {
+            menuVoluntario(vol);
+        }
+    }
+
+    private void menuAdministrador(Administrador admin){}
+    private void menuVeterinario(Veterinario vet) {}
+    private void menuVoluntario(Voluntarios vol) {}
+}

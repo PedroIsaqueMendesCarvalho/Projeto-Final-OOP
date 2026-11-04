@@ -16,5 +16,11 @@ public class Cirurgia{
     public LocalDate getDataCirurgia() {
         return dataCirurgia;
     }
+    public String getDescricao() {
+        return descricao;
+    }
+    public String getNomeCirurgia() {
+        return nomeCirurgia;
+    }
 
 }

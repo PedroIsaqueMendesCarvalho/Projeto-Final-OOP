@@ -39,6 +39,19 @@ package usuarios;
         if (!this.senha.equals(senha)) throw new SecurityException("Senha incorreta"); 
         else this.email = email;
     }
+
+    public String getEmail(){
+        return email;
+    }
+
+    public String getCpf(String senha){
+        if (!this.senha.equals(senha)) throw new SecurityException("Senha incorreta");
+        else return cpf;
+    }
+
+    public boolean autenticar(String senha){
+        return this.senha.equals(senha);
+    }
     
     
     

@@ -1,5 +1,5 @@
 package usuarios;
-class Voluntarios extends Usuarios implements Cadastro{
+public class Voluntarios extends Usuarios implements Cadastro{
 
     public Voluntarios(String nome, String cpf, String senha, String email, String telefone) {
         super(nome, cpf, senha, email, telefone);
@@ -8,7 +8,7 @@ class Voluntarios extends Usuarios implements Cadastro{
     @Override
     public void CadastroDeCliente(){};
 
-    void VisualizarAnimais(){};
+    public void VisualizarAnimais(){};
   
     
 }
