@@ -49,6 +49,11 @@ package usuarios;
         else return cpf;
     }
 
+    public String getTelefone(String senha){
+        if (!this.senha.equals(senha)) throw new SecurityException("Senha incorreta");
+        else return telefone;
+    }
+
     public boolean autenticar(String senha){
         return this.senha.equals(senha);
     }

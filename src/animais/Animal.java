@@ -2,7 +2,7 @@ package animais;
 import controledesaude.*;
 
 public abstract class Animal {
-    private ControleDeSaude controleDeSaude;
+    private ControleDeSaude controleDeSaude = new ControleDeSaude();
     private String nome;
     private String especie;
     private String raca;
@@ -12,7 +12,7 @@ public abstract class Animal {
     private java.time.LocalDate dataDeResgate;
     private int statusDeAdocao; //1=disponivel,2=adotado
     public Animal(ControleDeSaude controleDeSaude, String nome, String especie, String raca, int idade, int porte, int estadoDeSaude, java.time.LocalDate dataDeResgate, int statusDeAdocao) {
-        this.controleDeSaude = controleDeSaude;
+        setControleDeSaude(controleDeSaude);
         this.nome = nome;
         this.especie = especie;
         this.raca = raca;
@@ -23,6 +23,10 @@ public abstract class Animal {
         this.statusDeAdocao = statusDeAdocao;
     }
     public void setControleDeSaude(ControleDeSaude controleDeSaude) {
+        if(controleDeSaude == null){
+            throw new IllegalArgumentException("Controle de saude nao pode ser nulo");
+        }
+        else
         this.controleDeSaude = controleDeSaude;
     }
     public ControleDeSaude getControleDeSaude() {

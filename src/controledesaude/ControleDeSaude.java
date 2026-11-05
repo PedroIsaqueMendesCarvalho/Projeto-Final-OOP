@@ -14,11 +14,18 @@ public class ControleDeSaude {
         this.medicamentos.addAll(medicamentos);
         this.cirurgias.addAll(cirurgias);
     }
+ 
     public void addConsulta(Consulta consulta) {
         consultas.add(consulta);
     }
     public void addVacina(Vacina vacina) {
-        vacinas.add(vacina);
+    for (Vacina v : vacinas) {
+        if (v.getNomeVacina().equals(vacina.getNomeVacina())
+                && v.getDataAplicacao().equals(vacina.getDataAplicacao())) {
+            throw new IllegalArgumentException("Vacina já registrada nesta data");
+        }
+    }//Adiciona a vacina se não houver conflito de nome e data
+    vacinas.add(vacina);
     }
     public void addMedicamento(Medicamento medicamento) {
         medicamentos.add(medicamento);

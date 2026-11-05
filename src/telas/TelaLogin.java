@@ -2,10 +2,10 @@ package telas;
 import java.awt.GridLayout;
 import javax.swing.*;
 import usuarios.*;
-public class TelaInicial {
+public class TelaLogin {
     private final UsuariosCadastrados usuariosCadastrados;
 
-    public TelaInicial(UsuariosCadastrados usuariosCadastrados) {
+    public TelaLogin(UsuariosCadastrados usuariosCadastrados) {
         this.usuariosCadastrados = usuariosCadastrados;
     }
 
@@ -53,12 +53,12 @@ public class TelaInicial {
             menuAdministrador(admin);
         } else if (logado instanceof Veterinario vet) {
             menuVeterinario(vet);
-        } else if (logado instanceof Voluntarios vol) {
+        } else if (logado instanceof Voluntario vol) {
             menuVoluntario(vol);
         }
     }
 
     private void menuAdministrador(Administrador admin){}
     private void menuVeterinario(Veterinario vet) {}
-    private void menuVoluntario(Voluntarios vol) {}
+    private void menuVoluntario(Voluntario vol) {}
 }
