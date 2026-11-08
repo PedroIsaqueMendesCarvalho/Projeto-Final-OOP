@@ -1,3 +1,6 @@
+import animais.*;
+import controledesaude.*;
+import java.time.*;
 import telas.*;
 import usuarios.*;
 public class Main {
@@ -9,6 +12,9 @@ public class Main {
                                                               "vet@ong.com", "(11) 91234-5678"));
         usuariosCadastrados.cadastrarUsuario(new Voluntario("Voluntario", "321.654.987-09", "senhavol1",
                                                               "vol@ong.com", "(11) 94567-8901"));
+        AnimaisCadastrados animaisCadastrados = new AnimaisCadastrados();
+        animaisCadastrados.cadastrarAnimal(new Cao(new ControleDeSaude(), "Rex", "Cao", "Vira-lata", 3, 2, 4,
+                                                   LocalDate.of(2025, 5, 10), 1, 1, 3, 1));
 
         new TelaPrincipal(usuariosCadastrados).exibir();
     }

@@ -11,7 +11,8 @@ public abstract class Animal {
     private int estadoDeSaude;//1=critico,2=ruim,3=razoavel,4=saudavel
     private java.time.LocalDate dataDeResgate;
     private int statusDeAdocao; //1=disponivel,2=adotado
-    public Animal(ControleDeSaude controleDeSaude, String nome, String especie, String raca, int idade, int porte, int estadoDeSaude, java.time.LocalDate dataDeResgate, int statusDeAdocao) {
+    public Animal(ControleDeSaude controleDeSaude, String nome, String especie, String raca, int idade,
+                 int porte, int estadoDeSaude, java.time.LocalDate dataDeResgate, int statusDeAdocao) {
         setControleDeSaude(controleDeSaude);
         this.nome = nome;
         this.especie = especie;

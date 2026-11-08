@@ -22,8 +22,7 @@ public class TelaLogin {
             painel.add(new JLabel("Senha:"));
             painel.add(campoSenha);
 
-            int opcao = JOptionPane.showConfirmDialog(null, painel, "Login",
-                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+            int opcao = JOptionPane.showConfirmDialog(null, painel, "Login",JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
             if (opcao != JOptionPane.OK_OPTION) {
                 return; // usuario clicou em Cancelar ou fechou a janela
             }
@@ -42,23 +41,20 @@ public class TelaLogin {
         }
 
         if (logado == null) {
-            JOptionPane.showMessageDialog(null, "Numero maximo de tentativas atingido.",
-                    "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Numero maximo de tentativas atingido.","Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         JOptionPane.showMessageDialog(null, "Bem-vindo(a), " + logado.getNome() + "!");
 
         if (logado instanceof Administrador admin) {
-            menuAdministrador(admin);
+            new MenuAdministrador(admin).exibir();
         } else if (logado instanceof Veterinario vet) {
-            menuVeterinario(vet);
+            new MenuVeterinario(vet).exibir();
         } else if (logado instanceof Voluntario vol) {
-            menuVoluntario(vol);
+            new MenuVoluntario(vol).exibir();
         }
     }
 
-    private void menuAdministrador(Administrador admin){}
-    private void menuVeterinario(Veterinario vet) {}
-    private void menuVoluntario(Voluntario vol) {}
+    
 }
