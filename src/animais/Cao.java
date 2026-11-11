@@ -1,34 +1,35 @@
 package animais;
-import controledesaude.ControleDeSaude;
+import animais.enums.*;
+import controledesaude.*;
 
 public class Cao extends Animal{
-    private int adestrado; //1=sim,2=nao,3=parcialmente
-    private int nivelDeEnergia; //1=baixo,2=medio,3=alto
-    private int convivenciaComOutrosAnimais; //1=sim,2=nao,3=parcialmente
+    private SimNaoParcial adestrado;
+    private NivelDeEnergia nivelDeEnergia;
+    private SimNaoParcial convivenciaComOutrosAnimais;
 
-    public Cao(ControleDeSaude controleDeSaude, String nome, String especie, String raca, int idade, int porte, int estadoDeSaude, java.time.LocalDate dataDeResgate, int statusDeAdocao, int adestrado, int nivelDeEnergia, int convivenciaComOutrosAnimais) {
+    public Cao(ControleDeSaude controleDeSaude, String nome, String especie, String raca, int idade, Porte porte, EstadoDeSaude estadoDeSaude, java.time.LocalDate dataDeResgate, Disponibilidade statusDeAdocao, SimNaoParcial adestrado, NivelDeEnergia nivelDeEnergia, SimNaoParcial convivenciaComOutrosAnimais) {
         super(controleDeSaude, nome, especie, raca, idade, porte, estadoDeSaude, dataDeResgate, statusDeAdocao);
         this.adestrado = adestrado;
         this.nivelDeEnergia = nivelDeEnergia;
         this.convivenciaComOutrosAnimais = convivenciaComOutrosAnimais;
     }
-    public int getAdestrado() {
+    public SimNaoParcial getAdestrado() {
         return adestrado;
     }
-    public int getNivelDeEnergia() {
+    public NivelDeEnergia getNivelDeEnergia() {
         return nivelDeEnergia;
     }
-    public int getConvivenciaComOutrosAnimais() {
+    public SimNaoParcial getConvivenciaComOutrosAnimais() {
         return convivenciaComOutrosAnimais;
     }
-    public void setAdestrado(int adestrado) {
+    public void setAdestrado(SimNaoParcial adestrado) {
         this.adestrado = adestrado;
     }
-    public void setNivelDeEnergia(int nivelDeEnergia) {
+    public void setNivelDeEnergia(NivelDeEnergia nivelDeEnergia) {
         this.nivelDeEnergia = nivelDeEnergia;
     }
-    public void setConvivenciaComOutrosAnimais(int convivenciaComOutrosAnimais) {
+    public void setConvivenciaComOutrosAnimais(SimNaoParcial convivenciaComOutrosAnimais) {
         this.convivenciaComOutrosAnimais = convivenciaComOutrosAnimais;
     }
-    
+
 }

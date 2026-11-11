@@ -27,6 +27,27 @@ public class ControleDeSaude {
     }//Adiciona a vacina se não houver conflito de nome e data
     vacinas.add(vacina);
     }
+    public void removerVacina(Vacina vacina) {
+        // remove devolve false se a vacina nao estava na lista
+        if (!vacinas.remove(vacina)) {
+            throw new IllegalArgumentException("Vacina nao encontrada neste animal");
+        }
+    }
+    public void removerConsulta(Consulta consulta) {
+        if (!consultas.remove(consulta)) {
+            throw new IllegalArgumentException("Consulta nao encontrada neste animal");
+        }
+    }
+    public void removerMedicamento(Medicamento medicamento) {
+        if (!medicamentos.remove(medicamento)) {
+            throw new IllegalArgumentException("Medicamento nao encontrado neste animal");
+        }
+    }
+    public void removerCirurgia(Cirurgia cirurgia) {
+        if (!cirurgias.remove(cirurgia)) {
+            throw new IllegalArgumentException("Cirurgia nao encontrada neste animal");
+        }
+    }
     public void addMedicamento(Medicamento medicamento) {
         medicamentos.add(medicamento);
     }  

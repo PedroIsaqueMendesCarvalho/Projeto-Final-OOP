@@ -1,10 +1,13 @@
 package telas;
+import animais.*;
 import usuarios.*;
 public class TelaPrincipal {
     private final UsuariosCadastrados usuariosCadastrados;
+    private final AnimaisCadastrados animaisCadastrados;
 
-    public TelaPrincipal(UsuariosCadastrados usuariosCadastrados) {
+    public TelaPrincipal(UsuariosCadastrados usuariosCadastrados, AnimaisCadastrados animaisCadastrados) {
         this.usuariosCadastrados = usuariosCadastrados;
+        this.animaisCadastrados = animaisCadastrados;
     }
 
     public void exibir() {
@@ -13,7 +16,7 @@ public class TelaPrincipal {
             int escolha = Dialogos.escolherOpcao("Inicio", "Bem-vindo ao sistema da ONG", opcoes);
 
             if (escolha == 0) {
-                new TelaLogin(usuariosCadastrados).exibir();
+                new TelaLogin(usuariosCadastrados, animaisCadastrados).exibir();
             } else if (escolha == 1) {
                 new TelaCadastro(usuariosCadastrados).exibir();
             } else {

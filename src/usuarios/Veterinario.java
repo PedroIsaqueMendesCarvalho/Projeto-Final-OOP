@@ -13,6 +13,18 @@ import java.time.*;
         Vacina vacina = new Vacina(nomeVacina, dataAplicacao, dataProximaAplicacao);
         animal.getControleDeSaude().addVacina(vacina);
     }
+    public void removerVacina(Animal animal, Vacina vacina) {
+        animal.getControleDeSaude().removerVacina(vacina);
+    }
+    public void removerConsulta(Animal animal, Consulta consulta) {
+        animal.getControleDeSaude().removerConsulta(consulta);
+    }
+    public void removerMedicamento(Animal animal, Medicamento medicamento) {
+        animal.getControleDeSaude().removerMedicamento(medicamento);
+    }
+    public void removerCirurgia(Animal animal, Cirurgia cirurgia) {
+        animal.getControleDeSaude().removerCirurgia(cirurgia);
+    }
     public void registrarConsulta(Animal animal, LocalDate data, String horario, String tipoDeConsulta, String diagnostico, String prescricao) {
         Consulta consulta = new Consulta(data, horario, tipoDeConsulta, diagnostico, prescricao);
         animal.getControleDeSaude().addConsulta(consulta);

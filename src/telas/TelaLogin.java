@@ -1,12 +1,15 @@
 package telas;
-import java.awt.GridLayout;
+import animais.*;
+import java.awt.*;
 import javax.swing.*;
 import usuarios.*;
 public class TelaLogin {
     private final UsuariosCadastrados usuariosCadastrados;
+    private final AnimaisCadastrados animaisCadastrados;
 
-    public TelaLogin(UsuariosCadastrados usuariosCadastrados) {
+    public TelaLogin(UsuariosCadastrados usuariosCadastrados, AnimaisCadastrados animaisCadastrados) {
         this.usuariosCadastrados = usuariosCadastrados;
+        this.animaisCadastrados = animaisCadastrados;
     }
 
     public void exibir() {
@@ -48,11 +51,11 @@ public class TelaLogin {
         JOptionPane.showMessageDialog(null, "Bem-vindo(a), " + logado.getNome() + "!");
 
         if (logado instanceof Administrador admin) {
-            new MenuAdministrador(admin).exibir();
+            new MenuAdministrador(admin, usuariosCadastrados, animaisCadastrados).exibir();
         } else if (logado instanceof Veterinario vet) {
-            new MenuVeterinario(vet).exibir();
+            new MenuVeterinario(vet, animaisCadastrados).exibir();
         } else if (logado instanceof Voluntario vol) {
-            new MenuVoluntario(vol).exibir();
+            new MenuVoluntario(vol, animaisCadastrados).exibir();
         }
     }
 

@@ -1,26 +1,27 @@
 package animais;
-import controledesaude.ControleDeSaude;
+import animais.enums.*;
+import controledesaude.*;
 
 public class Gato extends Animal{
-    private int fivFelvPositivo; //1=sim,2=nao,3=desconhecido
-    private int usacaCaixaDeAreia; //1=sim,2=nao,3=apenas quando conveniente
-    public Gato(ControleDeSaude controleDeSaude, String nome, String especie, String raca, int idade, int porte, int estadoDeSaude, java.time.LocalDate dataDeResgate, int statusDeAdocao, int fivFelvPositivo, int usacaCaixaDeAreia) {
+    private ResultadoExame fivFelv;
+    private UsoCaixaDeAreia usaCaixaDeAreia;
+    public Gato(ControleDeSaude controleDeSaude, String nome, String especie, String raca, int idade, Porte porte, EstadoDeSaude estadoDeSaude, java.time.LocalDate dataDeResgate, Disponibilidade statusDeAdocao, ResultadoExame fivFelv, UsoCaixaDeAreia usaCaixaDeAreia) {
         super(controleDeSaude, nome, especie, raca, idade, porte, estadoDeSaude, dataDeResgate, statusDeAdocao);
-        this.fivFelvPositivo = fivFelvPositivo;
-        this.usacaCaixaDeAreia = usacaCaixaDeAreia;
+        this.fivFelv = fivFelv;
+        this.usaCaixaDeAreia = usaCaixaDeAreia;
     }
-    public int getFivFelvPositivo() {
-        return fivFelvPositivo;
+    public ResultadoExame getFivFelv() {
+        return fivFelv;
     }
-    public int getUsacaCaixaDeAreia() {
-        return usacaCaixaDeAreia;
+    public UsoCaixaDeAreia getUsaCaixaDeAreia() {
+        return usaCaixaDeAreia;
     }
-    public void setFivFelvPositivo(int fivFelvPositivo) {
-        this.fivFelvPositivo = fivFelvPositivo;
+    public void setFivFelv(ResultadoExame fivFelv) {
+        this.fivFelv = fivFelv;
     }
-    public void setUsacaCaixaDeAreia(int usacaCaixaDeAreia) {
-        this.usacaCaixaDeAreia = usacaCaixaDeAreia;
+    public void setUsaCaixaDeAreia(UsoCaixaDeAreia usaCaixaDeAreia) {
+        this.usaCaixaDeAreia = usaCaixaDeAreia;
     }
 
-    
+
 }

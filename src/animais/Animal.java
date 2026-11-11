@@ -1,4 +1,5 @@
 package animais;
+import animais.enums.*;
 import controledesaude.*;
 
 public abstract class Animal {
@@ -7,12 +8,12 @@ public abstract class Animal {
     private String especie;
     private String raca;
     private int idade;
-    private int porte; //1=pequeno,2=medio,3=grande
-    private int estadoDeSaude;//1=critico,2=ruim,3=razoavel,4=saudavel
+    private Porte porte;
+    private EstadoDeSaude estadoDeSaude;
     private java.time.LocalDate dataDeResgate;
-    private int statusDeAdocao; //1=disponivel,2=adotado
+    private Disponibilidade statusDeAdocao;
     public Animal(ControleDeSaude controleDeSaude, String nome, String especie, String raca, int idade,
-                 int porte, int estadoDeSaude, java.time.LocalDate dataDeResgate, int statusDeAdocao) {
+                 Porte porte, EstadoDeSaude estadoDeSaude, java.time.LocalDate dataDeResgate, Disponibilidade statusDeAdocao) {
         setControleDeSaude(controleDeSaude);
         this.nome = nome;
         this.especie = especie;
@@ -45,19 +46,19 @@ public abstract class Animal {
     public int getIdade() {
         return idade;
     }
-    public int getPorte() {
+    public Porte getPorte() {
         return porte;
     }
-    public int getEstadoDeSaude() {
+    public EstadoDeSaude getEstadoDeSaude() {
         return estadoDeSaude;
     }
     public java.time.LocalDate getDataDeResgate() {
         return dataDeResgate;
     }
-    public int getStatusDeAdocao() {
+    public Disponibilidade getStatusDeAdocao() {
         return statusDeAdocao;
     }
-    public void setStatusDeAdocao(int statusDeAdocao) {
+    public void setStatusDeAdocao(Disponibilidade statusDeAdocao) {
         this.statusDeAdocao = statusDeAdocao;
     }
 }
