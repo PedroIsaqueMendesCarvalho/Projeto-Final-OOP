@@ -1,4 +1,5 @@
 package telas.subtelas;
+import adocao.*;
 import animais.*;
 import animais.enums.*;
 import controledesaude.*;
@@ -13,15 +14,19 @@ public class SubTelaRelatorios {
     private static final int DIAS_ALERTA_VACINA = 30;
     private final UsuariosCadastrados usuariosCadastrados;
     private final AnimaisCadastrados animaisCadastrados;
+    private final AdocoesCadastradas adocoesCadastradas;
 
-    public SubTelaRelatorios(UsuariosCadastrados usuariosCadastrados, AnimaisCadastrados animaisCadastrados) {
+    public SubTelaRelatorios(UsuariosCadastrados usuariosCadastrados, AnimaisCadastrados animaisCadastrados,
+                             AdocoesCadastradas adocoesCadastradas) {
         this.usuariosCadastrados = usuariosCadastrados;
         this.animaisCadastrados = animaisCadastrados;
+        this.adocoesCadastradas = adocoesCadastradas;
     }
 
     public void exibir() {
         String[] opcoes = {"Animais disponiveis", "Animais adotados", "Vacinas proximas",
-                           "Atendimentos por animal", "Usuarios cadastrados", "Voltar"};
+                           "Atendimentos por animal", "Usuarios cadastrados",
+                           "Historico de adocoes", "Candidatos", "Voltar"};
         while (true) {
             int escolha = Dialogos.escolherOpcao("Relatorios", "Escolha o relatorio", opcoes);
 
@@ -31,6 +36,8 @@ public class SubTelaRelatorios {
                 case 2 -> mostrar("Vacinas proximas", relatorioVacinasProximas());
                 case 3 -> mostrar("Atendimentos por animal", relatorioAtendimentos());
                 case 4 -> mostrar("Usuarios cadastrados", relatorioUsuarios());
+                case 5 -> mostrar("Historico de adocoes", relatorioAdocoes());
+                case 6 -> mostrar("Candidatos", relatorioCandidatos());
                 default -> {
                     return; // usuario clicou em Voltar ou fechou a janela
                 }
@@ -89,6 +96,43 @@ public class SubTelaRelatorios {
                  .append(u.getNome()).append(" (").append(u.getEmail()).append(")\n");
         }
         return texto.isEmpty() ? "Nenhum usuario cadastrado" : texto.toString();
+    }
+
+    // todas as adocoes, em qualquer status, na ordem em que foram solicitadas
+    private String relatorioAdocoes() {
+        StringBuilder texto = new StringBuilder();
+        for (Adocao a : adocoesCadastradas.getAdocoes()) {
+            texto.append(a.getAnimal().getNome()).append(" - ").append(a.getCandidato().getNome())
+                 .append(" | ").append(a.getStatus())
+                 .append(" | solicitada em ").append(a.getDataSolicitacao().format(FORMATO_DATA));
+            // dataConclusao e null enquanto a adocao esta pendente
+            if (a.getDataConclusao() != null) {
+                texto.append(" | concluida em ").append(a.getDataConclusao().format(FORMATO_DATA))
+                     .append(" por ").append(a.getResponsavel().getNome());
+            }
+            if (a.getStatus() == StatusAdocao.DEVOLVIDA) {
+                texto.append(" | devolvida em ").append(a.getDataDevolucao().format(FORMATO_DATA))
+                     .append(": ").append(a.getMotivoDevolucao());
+            }
+            texto.append("\n");
+        }
+        return texto.isEmpty() ? "Nenhuma adocao registrada" : texto.toString();
+    }
+
+    private String relatorioCandidatos() {
+        StringBuilder texto = new StringBuilder();
+        for (Candidato c : adocoesCadastradas.getCandidatos()) {
+            int solicitacoes = 0;
+            for (Adocao a : adocoesCadastradas.getAdocoes()) {
+                if (a.getCandidato() == c) {
+                    solicitacoes++;
+                }
+            }
+            texto.append(c.getNome()).append(" - CPF ").append(c.getCpf())
+                 .append(", ").append(c.getTelefone()).append(", ").append(c.getEmail())
+                 .append(" | ").append(solicitacoes).append(" solicitacao(oes)\n");
+        }
+        return texto.isEmpty() ? "Nenhum candidato cadastrado" : texto.toString();
     }
 
     private void mostrar(String titulo, String texto) {

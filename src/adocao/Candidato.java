@@ -15,13 +15,25 @@ public class Candidato {
         if (cpf == null || cpf.isBlank() || !cpf.matches(REGEX_CPF)) {
             throw new IllegalArgumentException("CPF invalido");
         }else this.cpf = cpf;
-        if(telefone == null || telefone.isBlank()){
+        if(telefone == null || telefone.isBlank() || !telefone.matches(REGEX_TELEFONE)){
             throw new IllegalArgumentException("Telefone invalido");
         }else this.telefone = telefone;
         if(email == null || email.isBlank() || !email.matches(REGEX_EMAIL)){
             throw new IllegalArgumentException("Email invalido");
         }else this.email = email;
     }
-    
+    public String getNome() {
+        return nome;
+    }
+    public String getCpf() {
+        return cpf;
+    }
+    public String getTelefone() {
+        return telefone;
+    }
+    public String getEmail() {
+        return email;
+    }
+
     
 }

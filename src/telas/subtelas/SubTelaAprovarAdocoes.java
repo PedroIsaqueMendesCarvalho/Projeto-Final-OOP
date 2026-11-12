@@ -1,52 +1,66 @@
 package telas.subtelas;
-import animais.*;
-import animais.enums.*;
+import adocao.*;
 import java.util.*;
 import javax.swing.*;
 import telas.*;
 import usuarios.*;
 
-// versao simples: enquanto a classe Adocao nao estiver pronta, aprovar so muda o status do animal
 public class SubTelaAprovarAdocoes {
-    private final UsuariosCadastrados usuariosCadastrados;
-    private final AnimaisCadastrados animaisCadastrados;
+    private final Administrador admin; // aprovar e recusar exigem um administrador
+    private final AdocoesCadastradas adocoesCadastradas;
 
-    public SubTelaAprovarAdocoes(UsuariosCadastrados usuariosCadastrados, AnimaisCadastrados animaisCadastrados) {
-        this.usuariosCadastrados = usuariosCadastrados;
-        this.animaisCadastrados = animaisCadastrados;
+    public SubTelaAprovarAdocoes(Administrador admin, AdocoesCadastradas adocoesCadastradas) {
+        this.admin = admin;
+        this.adocoesCadastradas = adocoesCadastradas;
     }
 
     public void exibir() {
         while (true) {
-            List<Animal> disponiveis = new ArrayList<>(); // lista de animais disponiveis para adocao
-            for (Animal a : animaisCadastrados.getAnimais()) {
-                if (a.getStatusDeAdocao() == Disponibilidade.DISPONIVEL) {
-                    disponiveis.add(a);
-                }
-            }
-            if (disponiveis.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Nenhum animal disponivel para adocao");
+            List<Adocao> pendentes = adocoesCadastradas.getPorStatus(StatusAdocao.PENDENTE);
+            if (pendentes.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Nenhuma solicitacao de adocao pendente");
                 return;
             }
 
-            String[] nomes = new String[disponiveis.size() + 1];
-            for (int i = 0; i < disponiveis.size(); i++) {
-                nomes[i] = disponiveis.get(i).getNome() + " (" + disponiveis.get(i).getEspecie() + ")";
+            String[] opcoes = new String[pendentes.size() + 1];
+            for (int i = 0; i < pendentes.size(); i++) {
+                Adocao a = pendentes.get(i);
+                opcoes[i] = a.getAnimal().getNome() + " - " + a.getCandidato().getNome()
+                          + " (" + a.getCandidato().getCpf() + ")";
             }
-            nomes[disponiveis.size()] = "Voltar";
+            opcoes[pendentes.size()] = "Voltar";
 
-            int escolha = Dialogos.escolherOpcao("Aprovar adocoes", "Escolha o animal a ser adotado", nomes);// usa o metodo da classe Dialogos para mostrar os botoes e devolver o indice do escolhido
-            if (escolha < 0 || escolha >= disponiveis.size()) {
-                return; 
+            int escolha = Dialogos.escolherOpcao("Aprovar adocoes", "Escolha a solicitacao", opcoes);
+            if (escolha < 0 || escolha >= pendentes.size()) {
+                return; // usuario clicou em Voltar ou fechou a janela
             }
 
-            Animal animal = disponiveis.get(escolha);
-            int confirmacao = JOptionPane.showConfirmDialog(null,
-                    "Confirmar a adocao de " + animal.getNome() + "?", "Aprovar adocao", JOptionPane.YES_NO_OPTION);
-            if (confirmacao == JOptionPane.YES_OPTION) {
-                animal.setStatusDeAdocao(Disponibilidade.ADOTADO);
-                JOptionPane.showMessageDialog(null, "Adocao de " + animal.getNome() + " aprovada!");
+            Adocao adocao = pendentes.get(escolha);
+            int decisao = Dialogos.escolherOpcao("Solicitacao de adocao", detalhes(adocao),
+                                                 new String[]{"Aprovar", "Recusar", "Voltar"});
+            try {
+                if (decisao == 0) {
+                    // pelo AdocoesCadastradas, para recusar as outras solicitacoes do mesmo animal
+                    adocoesCadastradas.aprovar(adocao, admin);
+                    JOptionPane.showMessageDialog(null, "Adocao de " + adocao.getAnimal().getNome() + " aprovada!");
+                } else if (decisao == 1) {
+                    adocao.recusar(admin);
+                    JOptionPane.showMessageDialog(null, "Solicitacao recusada.");
+                }
+            } catch (IllegalStateException | IllegalArgumentException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             }
         }
+    }
+
+    // JLabel nao entende \n, mas aceita HTML: <br> quebra a linha
+    private String detalhes(Adocao adocao) {
+        Candidato c = adocao.getCandidato();
+        return "<html>Animal: " + adocao.getAnimal().getNome() + " (" + adocao.getAnimal().getEspecie() + ")"
+             + "<br>Candidato: " + c.getNome()
+             + "<br>CPF: " + c.getCpf()
+             + "<br>Telefone: " + c.getTelefone()
+             + "<br>Email: " + c.getEmail()
+             + "<br>Solicitada em " + adocao.getDataSolicitacao().format(Dialogos.FORMATO_DATA) + "</html>";
     }
 }

@@ -24,30 +24,30 @@ public class SubTelaHistoricoDeSaude {
 
         texto.append("\nVacinas:\n");
         for (Vacina v : saude.getVacinas()) {
-            texto.append("- ").append(v.getNomeVacina()).append(" em ").append(v.getDataAplicacao().format(Dialogos.FORMATO_DATA));
+            texto.append("- " + v.getNomeVacina() + " em " + v.getDataAplicacao().format(Dialogos.FORMATO_DATA));
             if (v.getProximaAplicacao() != null) {
-                texto.append(" (proxima: ").append(v.getProximaAplicacao().format(Dialogos.FORMATO_DATA)).append(")");
+                texto.append(" (proxima: " + v.getProximaAplicacao().format(Dialogos.FORMATO_DATA) + ")");
             }
             texto.append("\n");
         }
         texto.append("\nConsultas:\n");
         for (Consulta c : saude.getConsultas()) {
-            texto.append("- ").append(c.getData().format(Dialogos.FORMATO_DATA)).append(" ").append(c.getHorario())
-                 .append(" - ").append(c.getTipoDeConsulta()).append(": ").append(c.getDiagnostico()).append("\n");
+            texto.append("- " + c.getData().format(Dialogos.FORMATO_DATA) + " " + c.getHorario()
+                         + " - " + c.getTipoDeConsulta() + ": " + c.getDiagnostico() + "\n");
             // a prescricao e opcional, so aparece quando foi preenchida
             if (!c.getPrescricao().isBlank()) {
-                texto.append("    Prescricao: ").append(c.getPrescricao()).append("\n");
+                texto.append("    Prescricao: " + c.getPrescricao() + "\n");
             }
         }
         texto.append("\nMedicamentos:\n");
         for (Medicamento m : saude.getMedicamentos()) {
-            texto.append("- ").append(m.getNomeMedicamento()).append(" (").append(m.getDosagem())
-                 .append(") em ").append(m.getDataAplicacao().format(Dialogos.FORMATO_DATA)).append("\n");
+            texto.append("- " + m.getNomeMedicamento() + " (" + m.getDosagem() + ") em "
+                         + m.getDataAplicacao().format(Dialogos.FORMATO_DATA) + "\n");
         }
         texto.append("\nCirurgias:\n");
         for (Cirurgia c : saude.getCirurgias()) {
-            texto.append("- ").append(c.getNomeCirurgia()).append(" em ").append(c.getDataCirurgia().format(Dialogos.FORMATO_DATA))
-                 .append(": ").append(c.getDescricao()).append("\n");
+            texto.append("- " + c.getNomeCirurgia() + " em " + c.getDataCirurgia().format(Dialogos.FORMATO_DATA)
+                         + ": " + c.getDescricao() + "\n");
         }
         JOptionPane.showMessageDialog(null, texto.toString(), "Historico de saude", JOptionPane.INFORMATION_MESSAGE);
     }

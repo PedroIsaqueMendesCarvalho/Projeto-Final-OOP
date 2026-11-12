@@ -1,4 +1,5 @@
 package telas;
+import adocao.*;
 import animais.*;
 import java.awt.*;
 import javax.swing.*;
@@ -6,10 +7,13 @@ import usuarios.*;
 public class TelaLogin {
     private final UsuariosCadastrados usuariosCadastrados;
     private final AnimaisCadastrados animaisCadastrados;
+    private final AdocoesCadastradas adocoesCadastradas;
 
-    public TelaLogin(UsuariosCadastrados usuariosCadastrados, AnimaisCadastrados animaisCadastrados) {
+    public TelaLogin(UsuariosCadastrados usuariosCadastrados, AnimaisCadastrados animaisCadastrados,
+                     AdocoesCadastradas adocoesCadastradas) {
         this.usuariosCadastrados = usuariosCadastrados;
         this.animaisCadastrados = animaisCadastrados;
+        this.adocoesCadastradas = adocoesCadastradas;
     }
 
     public void exibir() {
@@ -51,11 +55,11 @@ public class TelaLogin {
         JOptionPane.showMessageDialog(null, "Bem-vindo(a), " + logado.getNome() + "!");
 
         if (logado instanceof Administrador admin) {
-            new MenuAdministrador(admin, usuariosCadastrados, animaisCadastrados).exibir();
+            new MenuAdministrador(admin, usuariosCadastrados, animaisCadastrados, adocoesCadastradas).exibir();
         } else if (logado instanceof Veterinario vet) {
             new MenuVeterinario(vet, animaisCadastrados).exibir();
         } else if (logado instanceof Voluntario vol) {
-            new MenuVoluntario(vol, animaisCadastrados).exibir();
+            new MenuVoluntario(vol, animaisCadastrados, adocoesCadastradas).exibir();
         }
     }
 
